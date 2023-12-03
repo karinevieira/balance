@@ -42,6 +42,8 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   # To help fixture creation [https://github.com/thoughtbot/factory_bot_rails]
   gem "factory_bot_rails", "6.4.2"
+  # Provides RSpec-compatible one-liners to test common Rails functionality [https://github.com/thoughtbot/shoulda-matchers]
+  gem "shoulda-matchers", "5.3.0"
 end
 
 group :development do
