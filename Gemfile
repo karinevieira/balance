@@ -49,3 +49,8 @@ group :development do
   gem "rubocop-rails", "2.22.2"
   gem "rubocop-rspec", "2.25.0"
 end
+
+group :test do
+  # Framework library to test our code [https://github.com/rspec/rspec-rails/]
+  gem "rspec-rails", "6.1.0"
+end
