@@ -1,0 +1,52 @@
+name: CI
+on: [push]
+jobs:
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Lint code
+        run: bundle exec rubocop
+
+  rspec:
+    name: RSpec
+    needs:
+      - rubocop
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://postgres:example@localhost:5432/balance_test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    services:
+      postgres:
+        image: postgres:14.2
+        ports: ['5432:5432']
+        env:
+          POSTGRES_DB: balance_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: example
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install postgres client
+        run: sudo apt-get install libpq-dev
+
+      - name: Create database structure
+        run: RAILS_ENV=test bundle exec rails db:reset
+
+      - name: Run tests
+        run: bundle exec rspec spec --format progress
