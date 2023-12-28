@@ -11,6 +11,10 @@ class User < ApplicationRecord
 
   attr_accessor :password_confirmation
 
+  has_one :profile, class_name: "UserProfile", dependent: :destroy
+
+  accepts_nested_attributes_for :profile, update_only: true
+
   validates :name, length: { maximum: 60 }, allow_nil: true
 
   validates :password, confirmation: true
