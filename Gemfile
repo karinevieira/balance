@@ -6,6 +6,12 @@ ruby "3.2.2"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+# Flexible authentication solution for Rails with Warden [https://github.com/heartcombo/devise]
+gem "devise", "4.9.3"
+# JWT token authentication with devise and rails [https://github.com/waiting-for-dev/devise-jwt]
+gem "devise-jwt", "0.11.0"
+# A fast JSON:API serializer for Ruby [https://github.com/jsonapi-serializer/jsonapi-serializer]
+gem "jsonapi-serializer", "2.2.0"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
