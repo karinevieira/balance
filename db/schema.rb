@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_28_135939) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_29_181155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "user_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "weight_in_cm", null: false
+    t.integer "weight", null: false
     t.integer "height_in_cm", null: false
     t.integer "workout_in_min", null: false
     t.integer "workout_days_frequency", null: false
