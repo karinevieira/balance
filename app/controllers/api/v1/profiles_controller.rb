@@ -15,8 +15,10 @@ module Api
 
       def user_params
         params.require(:user).permit(
-          profile_attributes: %i[weight_in_cm height_in_cm workout_in_min
-                                 workout_days_frequency active_lifestyle gender physical_activities]
+          profile_attributes: %i[
+            weight height_in_cm workout_in_min workout_days_frequency
+            active_lifestyle gender physical_activities
+          ]
         )
       end
 
