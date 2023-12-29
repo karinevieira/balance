@@ -3,6 +3,10 @@
 module Api
   module V1
     class ProfilesController < ApplicationController
+      def show
+        render json: UserSerializer.new(current_user)
+      end
+
       def update
         if profile.update(user_params[:profile_attributes])
           render json: UserSerializer.new(current_user)
