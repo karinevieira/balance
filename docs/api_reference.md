@@ -49,7 +49,7 @@ It returns an authentication JWT token in the response header, which will need t
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
    -H 'Authorization: user-token'
-   -d '{"user": {"profile_attributes": {"weight": 45, "height_in_cm": 153, "workout_in_min": 60, "workout_days_frequency": 3}}}'
+   -d '{"profile": {"weight": 45, "height_in_cm": 153, "workout_in_min": 60, "workout_days_frequency": 3}}'
 ```
 
 | Parameter | Type     | Description                |

@@ -8,7 +8,7 @@ module Api
       end
 
       def update
-        if profile.update(user_params[:profile_attributes])
+        if profile.update(profile_params)
           render json: UserSerializer.new(current_user)
         else
           render json: profile.errors, status: :unprocessable_entity
@@ -17,12 +17,15 @@ module Api
 
       private
 
-      def user_params
-        params.require(:user).permit(
-          profile_attributes: %i[
-            weight height_in_cm workout_in_min workout_days_frequency
-            active_lifestyle gender physical_activities
-          ]
+      def profile_params
+        params.require(:profile).permit(
+          :weight,
+          :height_in_cm,
+          :workout_in_min,
+          :workout_days_frequency,
+          :active_lifestyle,
+          :gender,
+          :physical_activities
         )
       end
 
