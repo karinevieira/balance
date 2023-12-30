@@ -3,7 +3,7 @@
 
 #### Sign up
 
-```http
+```
   curl -X POST localhost:3000/signup
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
@@ -20,7 +20,7 @@
 
 #### Login
 
-```http
+```
   curl -X POST localhost:3000/login
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
@@ -35,7 +35,7 @@ It returns an authentication JWT token in the response header, which will need t
 
 #### Logout
 
-```http
+```
   curl -X DELETE localhost:3000/logout
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
@@ -44,7 +44,7 @@ It returns an authentication JWT token in the response header, which will need t
 
 #### Update profile
 
-```http
+```
   curl -X PUT localhost:3000/api/v1/profile
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
@@ -64,7 +64,7 @@ It returns an authentication JWT token in the response header, which will need t
 
 #### Show profile
 
-```http
+```
   curl -X GET localhost:3000/api/v1/profile
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
