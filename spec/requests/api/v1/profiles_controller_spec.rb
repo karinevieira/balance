@@ -3,36 +3,35 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ProfilesController do
-  describe "GET #show" do
-    context "when the user is authenticated" do
-      it "renders a successful response" do
-        jwt_token = sign_in
+  describe "GET #index" do
+    it "renders a successful response" do
+      get api_v1_profiles_path, as: :json
 
-        get api_v1_profile_path, headers: { Authorization: jwt_token }, as: :json
-
-        expect(response).to be_successful
-      end
+      expect(response).to be_successful
     end
+  end
 
-    context "when the user is not authenticated" do
-      it "renders an unauthorized response" do
-        get api_v1_profile_path, as: :json
+  describe "GET #show" do
+    it "renders a successful response" do
+      user = create(:user)
 
-        expect(response).to have_http_status(:unauthorized)
-      end
+      get api_v1_profile_path(user), as: :json
+
+      expect(response).to be_successful
     end
   end
 
   describe "PUT #update" do
     context "when the user is authenticated" do
       it "renders a successful response" do
-        jwt_token = sign_in
+        user = create(:user)
+        jwt_token = sign_in(user)
 
         attributes = {
           weight: 50, height_in_cm: 150, workout_in_min: 60, workout_days_frequency: 3, active_lifestyle: true
         }
 
-        put api_v1_profile_path, headers: { Authorization: jwt_token }, params: { profile: attributes }, as: :json
+        put api_v1_profile_path(user), headers: { authorization: jwt_token }, params: { profile: attributes }, as: :json
 
         expect(response).to be_successful
       end
@@ -45,7 +44,7 @@ RSpec.describe Api::V1::ProfilesController do
           weight: 50, height_in_cm: 150, workout_in_min: 60, workout_days_frequency: 3, active_lifestyle: true
         }
 
-        put api_v1_profile_path, headers: { Authorization: jwt_token }, params: { profile: attributes }, as: :json
+        put api_v1_profile_path(user), headers: { authorization: jwt_token }, params: { profile: attributes }, as: :json
 
         expect(user.reload.profile.attributes).to include(
           "weight" => 50,
@@ -59,7 +58,13 @@ RSpec.describe Api::V1::ProfilesController do
 
     context "when the user is not authenticated" do
       it "renders an unauthorized response" do
-        get api_v1_profile_path, as: :json
+        user = create(:user)
+
+        attributes = {
+          weight: 50, height_in_cm: 150, workout_in_min: 60, workout_days_frequency: 3, active_lifestyle: true
+        }
+
+        put api_v1_profile_path(user), headers: { authorization: nil }, params: { profile: attributes }, as: :json
 
         expect(response).to have_http_status(:unauthorized)
       end

@@ -3,7 +3,18 @@
 module Api
   module V1
     class ProfilesController < ApplicationController
+      before_action :authenticate_user!, only: [:update]
+
+      def index
+        users = User.all
+        options = { is_collection: true }
+
+        render json: UserSerializer.new(users, options)
+      end
+
       def show
+        current_user = User.find(params[:id])
+
         render json: UserSerializer.new(current_user)
       end
 
