@@ -5,6 +5,13 @@ module Api
     class ExerciseMetricsController < ApplicationController
       before_action :authenticate_user!, only: [:create]
 
+      def index
+        current_user = User.find(params[:user_id])
+        options = { is_collection: true }
+
+        render json: ExerciseMetricSerializer.new(current_user.exercise_metrics, options)
+      end
+
       def create
         exercise_metric = current_user.exercise_metrics.new(exercise_metric_params)
 

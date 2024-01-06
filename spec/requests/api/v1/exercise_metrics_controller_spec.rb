@@ -3,6 +3,27 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::ExerciseMetricsController do
+  describe "GET #index" do
+    it "renders a successful response" do
+      user = create(:user)
+
+      get api_v1_exercise_metrics_path(user_id: user.id), as: :json
+
+      expect(response).to be_successful
+    end
+
+    it "renders a list of user exercise metrics" do
+      user = create(:user)
+      create_list(:exercise_metric, 3, user: user)
+
+      get api_v1_exercise_metrics_path(user_id: user.id), as: :json
+
+      parsed_response_body = response.parsed_body["data"]
+
+      expect(parsed_response_body.count).to eq(3)
+    end
+  end
+
   describe "POST #create" do
     # rubocop:disable RSpec/NestedGroups
     context "when the user is authenticated" do
