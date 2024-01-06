@@ -14,4 +14,18 @@ RSpec.describe Api::V1::ExerciseMetricsController do
       controller: "api/v1/exercise_metrics", action: :create
     )
   end
+
+  it do
+    expect(described_class).to route(:put, "/api/v1/exercise_metrics/1").to(
+      id: "1", controller: "api/v1/exercise_metrics",
+      action: :update
+    )
+  end
+
+  it do
+    expect(described_class).to route(:patch, "/api/v1/exercise_metrics/1").to(
+      id: "1", controller: "api/v1/exercise_metrics",
+      action: :update
+    )
+  end
 end
