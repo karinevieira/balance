@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_29_181155) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_06_125902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exercise_metrics", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "name"
+    t.integer "steps"
+    t.integer "distance_in_m"
+    t.text "intensity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_exercise_metrics_on_user_id"
+  end
 
   create_table "user_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -44,5 +55,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_29_181155) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "exercise_metrics", "users"
   add_foreign_key "user_profiles", "users"
 end
