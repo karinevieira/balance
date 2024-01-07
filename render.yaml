@@ -3,11 +3,13 @@ databases:
     ipAllowList: []
     databaseName: balance_production
     user: balance
+    plan: free
 
 services:
   - type: web
     name: balance
     env: ruby
+    plan: free
     buildCommand: "./render-build.sh"
     startCommand: "bundle exec rails s"
     envVars:
