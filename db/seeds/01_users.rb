@@ -66,5 +66,7 @@ Rails.logger.debug "\t Seeding users data..."
     }
   }
 ].each do |data|
-  User.create!(data)
+  user = User.find_or_initialize_by(email: data[:email])
+  user.assign_attributes(data.slice(:name, :password, :profile_attributes))
+  user.save!
 end
