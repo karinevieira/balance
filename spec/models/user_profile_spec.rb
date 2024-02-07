@@ -18,4 +18,12 @@ RSpec.describe UserProfile do
     it { is_expected.to validate_numericality_of(:workout_in_min).is_greater_than(0) }
     it { is_expected.to validate_numericality_of(:workout_days_frequency).is_greater_than_or_equal_to(0) }
   end
+
+  describe "#calculate_bmi" do
+    it "returns the user's BMI" do
+      profile = build_stubbed(:user_profile, weight: 60, height_in_cm: 165)
+
+      expect(profile.calculate_bmi).to eq("22.04")
+    end
+  end
 end
