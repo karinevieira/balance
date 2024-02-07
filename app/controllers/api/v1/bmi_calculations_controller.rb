@@ -8,7 +8,7 @@ module Api
       def show
         current_user = User.find(params[:id])
 
-        render json: { data: { user: current_user.email, imc: current_user.profile.calculate_bmi } }
+        render json: UserBmiSerializer.new(current_user)
       end
     end
   end
