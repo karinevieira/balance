@@ -3,10 +3,9 @@
 module Api
   module V1
     class ExerciseMetricsController < ApplicationController
-      before_action :authenticate_user!, only: %i[create update]
+      skip_before_action :authenticate_user!, only: %i[index create update]
 
       def index
-        current_user = User.find(params[:user_id])
         options = { is_collection: true }
 
         render json: ExerciseMetricSerializer.new(current_user.exercise_metrics, options)
@@ -23,6 +22,8 @@ module Api
       end
 
       def update
+        exercise_metric = current_user.exercise_metrics.find(params[:id])
+
         if exercise_metric.update(exercise_metric_params)
           render json: ExerciseMetricSerializer.new(exercise_metric)
         else
@@ -36,8 +37,8 @@ module Api
         params.require(:exercise_metric).permit(:name, :steps, :distance_in_m, :intensity)
       end
 
-      def exercise_metric
-        @exercise_metric ||= current_user.exercise_metrics.find(params[:id])
+      def current_user
+        @current_user ||= User.find(params[:user_id])
       end
     end
   end
