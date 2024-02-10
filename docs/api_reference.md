@@ -1,9 +1,13 @@
 
 # API Reference
 
-### Sign up
+- [Authentication](#authentication)
+- [Profiles](#profiles)
+- [Exercise Metrics](#exercise-metrics)
 
-#### Request
+## Authentication
+
+### Sign up
 
 POST `/signup`
 
@@ -15,7 +19,7 @@ POST `/signup`
 ```
   | Parameter | Type     | Description                |
   | :-------- | :------- | :------------------------- |
-  | `name` | `string` | **Optional**. |
+  | `name` | `string` | **Optional** |
   | `phone_number` | `string` | **Optional** |
   | `email` | `string` | **Required** |
   | `password` | `string` | **Required** |
@@ -40,8 +44,6 @@ POST `/signup`
 ```
 
 ### Login
-
-#### Request
 
 POST `/login`
 
@@ -98,11 +100,10 @@ DELETE `/logout`
 }
 ```
 
-### Profiles
+## Profiles
 
+### Read
 Returns all profiles.
-
-#### Request
 
 GET `/api/v1/profiles`
 
@@ -112,10 +113,8 @@ GET `/api/v1/profiles`
    -H 'Content-Type: application/json'
 ```
 
-### Show Profile
+### Show
 Returns profile for given user id.
-
-#### Request
 
 GET `/api/v1/profiles/:id`
 
@@ -155,11 +154,8 @@ GET `/api/v1/profiles/:id`
 }
 ```
 
-
-### Update profile
+### Update
 Updates profile for given user id.
-
-#### Request
 
 PUT `/api/v1/profiles/:id`
 
@@ -174,11 +170,11 @@ PUT `/api/v1/profiles/:id`
 | :-------- | :------- | :------------------------- |
 | `weight` | `integer` | **Required** |
 | `height_in_cm` | `integer` | **Required** |
-| `workout_in_min` | `integer` | **Required**. The duration of the workout activity in minutes. |
+| `workout_in_min` | `integer` | **Required** The duration of the workout activity in minutes. |
 | `workout_days_frequency` | `integer` | **Required** The frequency of days the user exercises. |
-| `active_lifestyle` | `boolean` | **Optional**. If the user usually exercises. By default, it's `false` |
+| `active_lifestyle` | `boolean` | **Optional** If the user usually exercises. By default, it's `false`. |
 | `gender` | `string` | **Optional** |
-| `physical_activities` | `string` | **Optional**. The physical activities that the user practices. |
+| `physical_activities` | `string` | **Optional** The physical activities that the user practices. |
 
 #### Response
 
@@ -209,15 +205,85 @@ PUT `/api/v1/profiles/:id`
 	}
 }
 ```
-### Exercise Metrics
+## Exercise Metrics
 
+### Create
+
+POST `/api/v1/exercise_metrics?user_id={id}`
+
+```
+  curl -X POST https://balance-dxhn.onrender.com/api/v1/exercise_metrics?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+   -d '{"exercise_metric": {"name": "Caminhada", "intensity": "low", "duration_in_min": 60}}'
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `user_id` | `integer` | **Required** |
+| `steps` | `integer` | **Optional** |
+| `distance_in_m` | `integer` | **Optional** |
+| `intensity` | `string` | **Required** |
+| `duration_in_min` | `integer` | **Required** |
+
+#### Response
+
+```javascript
+{
+	"data": {
+		"id": "1",
+		"type": "exercise_metric",
+		"attributes": {
+			"user_id": 1,
+			"name": "Caminhada",
+			"intensity": "low",
+			"duration_in_min": 60
+		}
+	}
+}
+```
+
+### Read
 Returns a list of data for exercises performed by the user.
 
-#### Request
 GET `/api/v1/exercise_metrics?user_id={id}`
 
 ```
   curl -X GET https://balance-dxhn.onrender.com/api/v1/exercise_metrics?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+```
+
+### Update
+PUT `/api/v1/exercise_metrics/:id?user_id={id}`
+
+```
+  curl -X PUT https://balance-dxhn.onrender.com/api/v1/exercise_metrics/1?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+   -d '{"exercise_metric": {"duration_in_min": 70}}'
+```
+
+#### Response
+
+```javascript
+{
+	"data": {
+		"id": "1",
+		"type": "exercise_metric",
+		"attributes": {
+			"user_id": 1,
+			"name": "Caminhada",
+			"intensity": "low",
+			"duration_in_min": 70
+		}
+	}
+}
+```
+### Delete
+DELETE `/api/v1/exercise_metrics/:id?user_id={id}`
+
+```
+  curl -X DELETE https://balance-dxhn.onrender.com/api/v1/exercise_metrics/1?user_id=1
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
 ```
