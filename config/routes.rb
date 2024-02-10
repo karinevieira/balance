@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :bmi_calculations, only: :show
-      resources :exercise_metrics, only: %i[index create update]
+      resources :exercise_metrics, only: %i[index create update destroy]
       resources :profiles, only: %i[index show update]
     end
   end

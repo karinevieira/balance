@@ -28,4 +28,11 @@ RSpec.describe Api::V1::ExerciseMetricsController do
       action: :update
     )
   end
+
+  it do
+    expect(described_class).to route(:delete, "/api/v1/exercise_metrics/1").to(
+      id: "1", controller: "api/v1/exercise_metrics",
+      action: :destroy
+    )
+  end
 end
