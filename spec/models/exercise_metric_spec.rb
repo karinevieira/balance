@@ -13,5 +13,6 @@ RSpec.describe ExerciseMetric do
 
     it { is_expected.to validate_numericality_of(:steps).is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_numericality_of(:distance_in_m).is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:duration_in_min).is_greater_than_or_equal_to(0) }
   end
 end
