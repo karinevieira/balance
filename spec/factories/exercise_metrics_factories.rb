@@ -7,5 +7,6 @@ FactoryBot.define do
     steps { 1000 }
     distance_in_m { 1000 }
     intensity { "low" }
+    duration_in_min { 30 }
   end
 end

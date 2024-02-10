@@ -30,7 +30,7 @@ RSpec.describe Api::V1::ExerciseMetricsController do
         user = create(:user)
 
         attributes = {
-          name: "test walk", steps: 1000, distance_in_m: 1000, intensity: "high"
+          name: "test walk", steps: 1000, distance_in_m: 1000, intensity: "high", duration_in_min: 60
         }
 
         post api_v1_exercise_metrics_path, params: { exercise_metric: attributes, user_id: user.id }, as: :json
@@ -42,7 +42,7 @@ RSpec.describe Api::V1::ExerciseMetricsController do
         user = create(:user)
 
         attributes = {
-          name: "test walk", steps: 1000, distance_in_m: 1000, intensity: "high"
+          name: "test walk", steps: 1000, distance_in_m: 1000, intensity: "high", duration_in_min: 60
         }
 
         post api_v1_exercise_metrics_path, params: { exercise_metric: attributes, user_id: user.id }, as: :json
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::ExerciseMetricsController do
         user = create(:user)
 
         attributes = {
-          name: nil, steps: 1000, distance_in_m: 1000, intensity: nil
+          name: nil, steps: 1000, distance_in_m: 1000, intensity: nil, duration_in_min: nil
         }
 
         post api_v1_exercise_metrics_path, params: { exercise_metric: attributes, user_id: user.id }, as: :json
@@ -73,7 +73,7 @@ RSpec.describe Api::V1::ExerciseMetricsController do
         user = create(:user)
 
         attributes = {
-          name: nil, steps: 1000, distance_in_m: 1000, intensity: nil
+          name: nil, steps: 1000, distance_in_m: 1000, intensity: nil, duration_in_min: nil
         }
 
         post api_v1_exercise_metrics_path, params: { exercise_metric: attributes, user_id: user.id }, as: :json

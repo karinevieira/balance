@@ -34,7 +34,7 @@ module Api
       private
 
       def exercise_metric_params
-        params.require(:exercise_metric).permit(:name, :steps, :distance_in_m, :intensity)
+        params.require(:exercise_metric).permit(:name, :steps, :distance_in_m, :intensity, :duration_in_min)
       end
 
       def current_user
