@@ -6,7 +6,5 @@ class ExerciseMetric < ApplicationRecord
   validates :name, presence: true
   validates :intensity, presence: true
 
-  validates :steps, numericality: { greater_than_or_equal_to: 0 }
-  validates :distance_in_m, numericality: { greater_than_or_equal_to: 0 }
   validates :duration_in_min, numericality: { greater_than_or_equal_to: 0 }
 end
