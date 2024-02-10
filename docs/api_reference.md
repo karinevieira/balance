@@ -212,10 +212,10 @@ PUT `/api/v1/profiles/:id`
 POST `/api/v1/exercise_metrics?user_id={id}`
 
 ```
-  curl -X POST https://balance-dxhn.onrender.com/api/v1/exercise_metrics/user_id=1
+  curl -X POST https://balance-dxhn.onrender.com/api/v1/exercise_metrics?user_id=1
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
-   -d '{"exercise_metric": {"name": "Caminhada", "intensity": "6", "duration_in_min": 60}}'
+   -d '{"exercise_metric": {"name": "Caminhada", "intensity": "low", "duration_in_min": 60}}'
 ```
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
