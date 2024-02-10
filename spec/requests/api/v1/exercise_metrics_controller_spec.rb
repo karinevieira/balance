@@ -138,4 +138,26 @@ RSpec.describe Api::V1::ExerciseMetricsController do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    it "renders a successful response" do
+      user = create(:user)
+      exercise_metric = create(:exercise_metric, user: user)
+
+      delete api_v1_exercise_metric_path(exercise_metric),
+        params: { user_id: user.id }, as: :json
+
+      expect(response).to have_http_status(:no_content)
+    end
+
+    it "destroys user's exercise metric" do
+      user = create(:user)
+      exercise_metric = create(:exercise_metric, user: user)
+
+      delete api_v1_exercise_metric_path(exercise_metric),
+        params: { user_id: user.id }, as: :json
+
+      expect(user.reload.exercise_metrics.last).not_to eq(exercise_metric)
+    end
+  end
 end

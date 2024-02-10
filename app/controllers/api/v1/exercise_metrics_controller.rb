@@ -3,7 +3,7 @@
 module Api
   module V1
     class ExerciseMetricsController < ApplicationController
-      skip_before_action :authenticate_user!, only: %i[index create update]
+      skip_before_action :authenticate_user!, only: %i[index create update destroy]
 
       def index
         options = { is_collection: true }
@@ -29,6 +29,12 @@ module Api
         else
           render json: exercise_metric.errors, status: :unprocessable_entity
         end
+      end
+
+      def destroy
+        exercise_metric = current_user.exercise_metrics.find(params[:id])
+
+        exercise_metric.destroy
       end
 
       private
