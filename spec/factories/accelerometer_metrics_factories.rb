@@ -2,7 +2,6 @@
 
 FactoryBot.define do
   factory :accelerometer_metric do
-    exercise_metric
     type { "Corrida" }
     time_in_min { 3 }
     level { "Sedentário" }
