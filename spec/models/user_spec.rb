@@ -7,6 +7,7 @@ RSpec.describe User do
     it { is_expected.to have_one(:profile).class_name("UserProfile").dependent(:destroy) }
 
     it { is_expected.to have_many(:exercise_metrics).dependent(:destroy) }
+    it { is_expected.to have_many(:accelerometer_metrics).dependent(:destroy) }
 
     it { is_expected.to accept_nested_attributes_for(:profile) }
   end

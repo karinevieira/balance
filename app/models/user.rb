@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_one :profile, class_name: "UserProfile", dependent: :destroy
 
   has_many :exercise_metrics, dependent: :destroy
+  has_many :accelerometer_metrics, dependent: :destroy
 
   accepts_nested_attributes_for :profile, update_only: true
 
