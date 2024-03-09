@@ -4,6 +4,7 @@
 - [Authentication](#authentication)
 - [Profiles](#profiles)
 - [Exercise Metrics](#exercise-metrics)
+- [Accelerometer Metrics](#accelerometer-metrics)
 
 ## Authentication
 
@@ -284,6 +285,87 @@ DELETE `/api/v1/exercise_metrics/:id?user_id={id}`
 
 ```
   curl -X DELETE https://balance-dxhn.onrender.com/api/v1/exercise_metrics/1?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+```
+## Accelerometer Metrics
+
+### Create
+
+POST `/api/v1/accelerometer_metrics?user_id={id}`
+
+```
+  curl -X POST https://balance-dxhn.onrender.com/api/v1/accelerometer_metrics?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+   -d '{"accelerometer_metric": {"exercise": "Caminhada", "time_in_min": 5, "level": "Sedentário"}}'
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `user_id` | `integer` | **Required** |
+| `exercise` | `text` | **Required** |
+| `time_in_min` | `integer` | **Required** |
+| `level` | `text` | **Required** |
+
+#### Response
+
+```javascript
+{
+	"data": {
+		"id": "1",
+		"type": "accelerometer_metric",
+		"attributes": {
+			"user_id": 1,
+			"exercise": "Caminhada",
+			"time_in_min": 60,
+			"level": "Sedentário"
+		}
+	}
+}
+```
+
+### Read
+Returns user's accelerometer metrics.
+
+GET `/api/v1/accelerometer_metrics?user_id={id}`
+
+```
+  curl -X GET https://balance-dxhn.onrender.com/api/v1/accelerometer_metrics?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+```
+
+### Update
+PUT `/api/v1/accelerometer_metrics/:id?user_id={id}`
+
+```
+  curl -X PUT https://balance-dxhn.onrender.com/api/v1/accelerometer_metrics/1?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+   -d '{"accelerometer_metric": {"time_in_min": 3}}'
+```
+
+#### Response
+
+```javascript
+{
+	"data": {
+		"id": "1",
+		"type": "accelerometer_metric",
+		"attributes": {
+			"user_id": 1,
+			"exercise": "Caminhada",
+			"time_in_min": 3,
+			"level": "Sedentário"
+		}
+	}
+}
+```
+### Delete
+DELETE `/api/v1/accelerometer_metrics/:id?user_id={id}`
+
+```
+  curl -X DELETE https://balance-dxhn.onrender.com/api/v1/accelerometer_metrics/1?user_id=1
    -H 'Accept: application/json'
    -H 'Content-Type: application/json'
 ```
