@@ -3,6 +3,7 @@
 Rails.logger.debug "\t Seeding exercise metrics data..."
 
 user = User.find_by!(email: "isabella_galvao@limao.com.br")
+user.exercise_metrics.destroy_all
 
 [
   {
