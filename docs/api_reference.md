@@ -3,6 +3,7 @@
 
 - [Authentication](#authentication)
 - [Profiles](#profiles)
+- [User Metrics](#user-metrics)
 - [Exercise Metrics](#exercise-metrics)
 - [Accelerometer Metrics](#accelerometer-metrics)
 
@@ -206,6 +207,20 @@ PUT `/api/v1/profiles/:id`
 	}
 }
 ```
+## User Metrics
+
+### Read
+
+Returns a list of user's accelerometer and exercise metrics.
+
+GET `/api/v1/user_metrics?user_id={id}`
+
+```
+  curl -X GET https://balance-dxhn.onrender.com/api/v1/user_metrics?user_id=1
+   -H 'Accept: application/json'
+   -H 'Content-Type: application/json'
+```
+
 ## Exercise Metrics
 
 ### Create

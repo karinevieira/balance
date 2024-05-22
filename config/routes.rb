@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       resources :bmi_calculations, only: :show
       resources :exercise_metrics, only: %i[index create update destroy]
       resources :profiles, only: %i[index show update]
+      resources :user_metrics, only: :index
     end
   end
 end
